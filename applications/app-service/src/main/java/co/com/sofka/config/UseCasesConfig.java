@@ -1,9 +1,11 @@
 package co.com.sofka.config;
 
+import co.com.sofka.model.compramaterial.gateways.CompraMaterialRepository;
 import co.com.sofka.model.material.gateways.MaterialRepository;
 import co.com.sofka.model.ordenconstruccion.gateways.OrdenConstruccionRepository;
 import co.com.sofka.model.solicitud.gateways.SolicitudRepository;
 import co.com.sofka.model.tipoconstruccion.gateways.TipoConstruccionRepository;
+import co.com.sofka.usecase.compramaterial.CreateCompraMaterialUseCase;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
@@ -34,5 +36,8 @@ public class UseCasesConfig {
         }
         public CreateTipoConstruccionUseCase createTipoConstruccionUseCase(TipoConstruccionRepository tipoConstruccionRepository){
                 return new CreateTipoConstruccionUseCase(tipoConstruccionRepository);
+        }
+        public CreateCompraMaterialUseCase createCompraMaterialUseCase(CompraMaterialRepository compraMaterialRepository,MaterialRepository materialRepository) {
+                return new CreateCompraMaterialUseCase(compraMaterialRepository,materialRepository);
         }
 }
