@@ -12,6 +12,9 @@ public class CreateCompraMaterialUseCase {
     private final MaterialRepository materialRepository;
 
     public Mono<CompraMaterial> createCompraMaterial(CompraMaterial compraMaterial){
-        return compraMaterialRepository.createCompraMaterial(compraMaterial);
+        return materialRepository.findByNombreMaterial(compraMaterial.getMaterial()).flatMap(resource -> {
+            resource.setCantidadDisponibleMaterial(resource.getCantidadDisponibleMaterial()+compraMaterial.getCantidadIngresada());
+            return materialRepository.updateMaterial(resource);
+        }).flatMap(resource -> compraMaterialRepository.createCompraMaterial(compraMaterial));
     }
 }

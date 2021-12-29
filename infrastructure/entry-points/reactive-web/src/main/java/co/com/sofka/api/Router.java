@@ -7,6 +7,7 @@ import co.com.sofka.model.solicitud.Solicitud;
 import co.com.sofka.model.tipoconstruccion.TipoConstruccion;
 import co.com.sofka.usecase.compramaterial.CreateCompraMaterialUseCase;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
+import co.com.sofka.usecase.material.UpdateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
 import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
@@ -80,6 +81,17 @@ public class Router {
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))
                         )
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> updateResource(UpdateMaterialUseCase updateMaterialUseCase){
+        return route(PUT("/material").and(accept(MediaType.APPLICATION_JSON)),
+                request ->request.bodyToMono(Material.class)
+                        .flatMap(recursoDTO -> updateMaterialUseCase.updateMaterial(recursoDTO)
+                                .flatMap(result->ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result)))
         );
     }
 

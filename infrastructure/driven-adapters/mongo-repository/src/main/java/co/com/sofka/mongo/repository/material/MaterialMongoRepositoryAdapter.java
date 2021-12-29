@@ -30,6 +30,15 @@ public class MaterialMongoRepositoryAdapter extends AdapterOperations<Material, 
     }
 
     @Override
+    public Mono<Material> updateMaterial(Material material) {
+        MaterialData materialData = MaterialData.builder().id(material.getId())
+                .nombreMaterial(material.getNombreMaterial())
+                .cantidadDisponibleMaterial(material.getCantidadDisponibleMaterial())
+                .build();
+        return repository.save(materialData).map(this::toEntity);
+    }
+
+    @Override
     public Mono<Material> findByNombreMaterial(String nombreMaterial) {
         return repository.findByNombreMaterial(nombreMaterial);
     }
