@@ -30,7 +30,9 @@ public class MaterialMongoRepositoryAdapter extends AdapterOperations<Material, 
     }
 
     @Override
-    public Mono<Material> findByName(String name) {
-        return null;
+    public Mono<Material> findByNombreMaterial(String nombreMaterial) {
+        return repository.findByNombreMaterial(nombreMaterial);
     }
+
+
 }

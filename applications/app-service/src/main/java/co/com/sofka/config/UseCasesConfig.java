@@ -2,6 +2,7 @@ package co.com.sofka.config;
 
 import co.com.sofka.model.material.gateways.MaterialRepository;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
+import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -15,5 +16,8 @@ import org.springframework.context.annotation.FilterType;
 public class UseCasesConfig {
         public CreateMaterialUseCase createMaterialUseCase(MaterialRepository materialRepository) {
                 return new CreateMaterialUseCase(materialRepository);
+        }
+        public FindByNombreMaterialUseCase findByNombreMaterialUseCase(MaterialRepository materialRepository) {
+                return new FindByNombreMaterialUseCase(materialRepository);
         }
 }

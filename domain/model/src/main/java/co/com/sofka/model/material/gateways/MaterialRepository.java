@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface MaterialRepository {
     Mono<Material> createMaterial(Material material);
-    Mono<Material> findByName(String name);
+    Mono<Material> findByNombreMaterial(String nombreMaterial);
 }
