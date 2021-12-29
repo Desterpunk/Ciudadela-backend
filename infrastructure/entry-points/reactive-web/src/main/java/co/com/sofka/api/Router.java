@@ -2,8 +2,10 @@ package co.com.sofka.api;
 
 import co.com.sofka.model.material.Material;
 import co.com.sofka.model.ordenconstruccion.OrdenConstruccion;
+import co.com.sofka.model.solicitud.Solicitud;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
+import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -34,6 +36,18 @@ public class Router {
         return route(POST("/orden/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(OrdenConstruccion.class)
                         .flatMap(resourceDTO -> createOrdenConstruccionUseCase.createOrdenConstruccion(resourceDTO)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        )
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> createSolicitud(CreateSolicitudUseCase createSolicitudUseCase) {
+        return route(POST("/solicitud/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(Solicitud.class)
+                        .flatMap(resourceDTO -> createSolicitudUseCase.createSolicitud(resourceDTO)
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))
