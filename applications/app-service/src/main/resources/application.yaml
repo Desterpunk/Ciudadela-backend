@@ -1,0 +1,16 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "suraProject1"
+  devtools:
+    add-properties: false
+  h2:
+    console:
+      enabled: true
+      path: "/h2"
+  profiles:
+    include: null
+  data:
+    mongodb:
+      uri: "mongodb+srv://admin:admin@proyectos.vatwp.mongodb.net/architecture?retryWrites=true&w=majority"
