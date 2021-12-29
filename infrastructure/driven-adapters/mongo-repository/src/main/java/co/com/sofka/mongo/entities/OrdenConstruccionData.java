@@ -1,14 +1,15 @@
-package co.com.sofka.model.ordenconstruccion;
+package co.com.sofka.mongo.entities;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("ordenConstruccion")
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor
-public class OrdenConstruccion {
+public class OrdenConstruccionData {
     private String id;
     private String estadoOrdenConstruccion;
 }
