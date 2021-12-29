@@ -1,14 +1,15 @@
-package co.com.sofka.model.tipoconstruccion;
+package co.com.sofka.mongo.entities;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("tipoConstruccion")
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor
-public class TipoConstruccion {
+public class TipoConstruccionData {
     private String id;
     private String nombreTipoConstruccion;
     private Double cemento;

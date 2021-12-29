@@ -3,9 +3,11 @@ package co.com.sofka.api;
 import co.com.sofka.model.material.Material;
 import co.com.sofka.model.ordenconstruccion.OrdenConstruccion;
 import co.com.sofka.model.solicitud.Solicitud;
+import co.com.sofka.model.tipoconstruccion.TipoConstruccion;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
 import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
+import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -48,6 +50,18 @@ public class Router {
         return route(POST("/solicitud/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(Solicitud.class)
                         .flatMap(resourceDTO -> createSolicitudUseCase.createSolicitud(resourceDTO)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        )
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> createTipoConstruccion(CreateTipoConstruccionUseCase createTipoConstruccionUseCase) {
+        return route(POST("/tipoconstruccion/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(TipoConstruccion.class)
+                        .flatMap(resourceDTO -> createTipoConstruccionUseCase.createTipoConstruccion(resourceDTO)
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))
