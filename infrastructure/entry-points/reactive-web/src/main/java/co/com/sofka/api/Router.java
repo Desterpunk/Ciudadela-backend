@@ -6,6 +6,7 @@ import co.com.sofka.model.ordenconstruccion.OrdenConstruccion;
 import co.com.sofka.model.solicitud.Solicitud;
 import co.com.sofka.model.tipoconstruccion.TipoConstruccion;
 import co.com.sofka.usecase.compramaterial.CreateCompraMaterialUseCase;
+import co.com.sofka.usecase.compramaterial.ReducirMaterialSegunTipoUseCase;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.material.FindAllMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
@@ -127,5 +128,17 @@ public class Router {
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
                         .body(handler.findByXandY(request.pathVariable("x"),request.pathVariable("y")), Boolean.class));
 
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> reducirMaterial(ReducirMaterialSegunTipoUseCase reducirMaterialSegunTipoUseCase) {
+        return route(POST("/reducirmaterial/create").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(TipoConstruccion.class)
+                        .flatMap(resourceDTO -> reducirMaterialSegunTipoUseCase.reducirMaterialSegunTipo(resourceDTO)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        )
+        );
     }
 }
