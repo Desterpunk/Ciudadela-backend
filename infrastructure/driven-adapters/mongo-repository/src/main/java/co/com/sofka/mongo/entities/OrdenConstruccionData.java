@@ -11,5 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class OrdenConstruccionData {
     private String id;
+    private String idSolicitud;
     private String estadoOrdenConstruccion;
 }

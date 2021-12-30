@@ -23,7 +23,8 @@ public class OrdenConstruccionMongoRepositoryAdapter extends AdapterOperations<O
 
     @Override
     public Mono<OrdenConstruccion> createOrdenConstruccion(OrdenConstruccion ordenConstruccion) {
-        OrdenConstruccionData ordenConstruccionData = OrdenConstruccionData.builder().estadoOrdenConstruccion(ordenConstruccion.getEstadoOrdenConstruccion())
+        OrdenConstruccionData ordenConstruccionData = OrdenConstruccionData.builder().idSolicitud(ordenConstruccion.getIdSolicitud())
+                .estadoOrdenConstruccion(ordenConstruccion.getEstadoOrdenConstruccion())
                 .build();
         return repository.save(ordenConstruccionData).map(this::toEntity);
     }

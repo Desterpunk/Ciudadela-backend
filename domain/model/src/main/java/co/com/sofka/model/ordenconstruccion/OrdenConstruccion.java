@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrdenConstruccion {
     private String id;
+    private String idSolicitud;
     private String estadoOrdenConstruccion;
 }
