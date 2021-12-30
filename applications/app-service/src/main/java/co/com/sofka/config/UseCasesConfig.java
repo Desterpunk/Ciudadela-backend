@@ -12,6 +12,7 @@ import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
 import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
+import co.com.sofka.usecase.solicitud.FindByXAndYUseCase;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
 import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import org.springframework.context.annotation.ComponentScan;
@@ -54,5 +55,8 @@ public class UseCasesConfig {
         }
         public FindAllMaterialUseCase findAllMaterialUseCase(MaterialRepository materialRepository) {
                 return new FindAllMaterialUseCase(materialRepository);
+        }
+        public FindByXAndYUseCase findByXAndYUseCase(SolicitudRepository solicitudRepository){
+                return new FindByXAndYUseCase(solicitudRepository);
         }
 }

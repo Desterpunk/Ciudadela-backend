@@ -113,11 +113,19 @@ public class Router {
 
     }
     @Bean
-    public RouterFunction<ServerResponse> getAllResources(FindAllMaterialUseCase findAllMaterialUseCase){
+    public RouterFunction<ServerResponse> getAllMaterial(FindAllMaterialUseCase findAllMaterialUseCase){
         return route(GET("/material").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(findAllMaterialUseCase.findAllMaterial(), Material.class))
         );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> findByXandY(Handler handler) {
+        return route(GET("/solicitud/{x}/{y}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.findByXandY(request.pathVariable("x"),request.pathVariable("y")), Boolean.class));
+
     }
 }

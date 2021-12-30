@@ -32,4 +32,9 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
                 .build();
         return repository.save(solicitudData).map(this::toEntity);
     }
+
+    @Override
+    public Mono<Solicitud> findByXAndY(Double x, Double y) {
+        return repository.findByXAndY(x,y);
+    }
 }
