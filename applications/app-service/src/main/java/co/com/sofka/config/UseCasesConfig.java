@@ -7,6 +7,7 @@ import co.com.sofka.model.solicitud.gateways.SolicitudRepository;
 import co.com.sofka.model.tipoconstruccion.gateways.TipoConstruccionRepository;
 import co.com.sofka.usecase.compramaterial.CreateCompraMaterialUseCase;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
+import co.com.sofka.usecase.material.FindAllMaterialUseCase;
 import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
@@ -33,8 +34,11 @@ public class UseCasesConfig {
         public CreateOrdenConstruccionUseCase createOrdenConstruccionUseCase(OrdenConstruccionRepository ordenConstruccionRepository){
                 return new CreateOrdenConstruccionUseCase(ordenConstruccionRepository);
         }
-        public CreateSolicitudUseCase createSolicitudUseCase(SolicitudRepository solicitudRepository){
-                return new CreateSolicitudUseCase(solicitudRepository);
+        public CreateSolicitudUseCase createSolicitudUseCase(SolicitudRepository solicitudRepository,
+                                                             OrdenConstruccionRepository ordenConstruccionRepository,
+                                                             TipoConstruccionRepository tipoConstruccionRepository,
+                                                             MaterialRepository materialRepository){
+                return new CreateSolicitudUseCase(solicitudRepository, ordenConstruccionRepository, tipoConstruccionRepository, materialRepository);
         }
         public CreateTipoConstruccionUseCase createTipoConstruccionUseCase(TipoConstruccionRepository tipoConstruccionRepository){
                 return new CreateTipoConstruccionUseCase(tipoConstruccionRepository);
@@ -47,5 +51,8 @@ public class UseCasesConfig {
         }
         public FindByNombreTipoConstruccionUseCase findByNombreTipoConstruccionUseCase(TipoConstruccionRepository tipoConstruccionRepository){
                 return new FindByNombreTipoConstruccionUseCase(tipoConstruccionRepository);
+        }
+        public FindAllMaterialUseCase findAllMaterialUseCase(MaterialRepository materialRepository) {
+                return new FindAllMaterialUseCase(materialRepository);
         }
 }

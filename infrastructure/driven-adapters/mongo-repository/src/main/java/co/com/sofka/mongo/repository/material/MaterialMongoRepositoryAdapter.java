@@ -6,6 +6,7 @@ import co.com.sofka.mongo.entities.MaterialData;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -41,6 +42,11 @@ public class MaterialMongoRepositoryAdapter extends AdapterOperations<Material, 
     @Override
     public Mono<Material> findByNombreMaterial(String nombreMaterial) {
         return repository.findByNombreMaterial(nombreMaterial);
+    }
+
+    @Override
+    public Flux<Material> findAllMaterial() {
+        return repository.findAll().map(this::toEntity);
     }
 
 

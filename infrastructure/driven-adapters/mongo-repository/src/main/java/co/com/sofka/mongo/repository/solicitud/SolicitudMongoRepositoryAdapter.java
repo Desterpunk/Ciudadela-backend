@@ -23,7 +23,8 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
 
     @Override
     public Mono<Solicitud> createSolicitud(Solicitud solicitud) {
-        SolicitudData solicitudData = SolicitudData.builder().tipoConstruccion(solicitud.getTipoConstruccion())
+        SolicitudData solicitudData = SolicitudData.builder().id(solicitud.getId())
+                .tipoConstruccion(solicitud.getTipoConstruccion())
                 .x(solicitud.getX())
                 .y(solicitud.getY())
                 .fechaInicio(solicitud.getFechaInicio())
