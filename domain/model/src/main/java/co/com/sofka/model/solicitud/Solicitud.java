@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Solicitud {
     private String id;
-    private String idTipoConstruccion;
+    private String tipoConstruccion;
     private double x;
     private double y;
     private Date fechaInicio;
