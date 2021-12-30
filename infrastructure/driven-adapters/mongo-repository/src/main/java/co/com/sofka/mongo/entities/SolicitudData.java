@@ -14,8 +14,8 @@ import java.util.Date;
 public class SolicitudData {
     private String id;
     private String tipoConstruccion;
-    private double x;
-    private double y;
+    private Double x;
+    private Double y;
     private Date fechaInicio;
     private Date fechaEntrega;
 }

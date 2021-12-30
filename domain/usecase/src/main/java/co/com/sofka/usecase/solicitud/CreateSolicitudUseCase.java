@@ -26,6 +26,8 @@ public class CreateSolicitudUseCase {
             return Mono.just("hola");
         }).subscribe();
 
-        return solicitudRepository.createSolicitud(solicitud);
+        return solicitudRepository.findByXAndY(solicitud.getX(),solicitud.getY())
+                .flatMap(resource -> Mono.error(new RuntimeException("Ya existe un/a " + resource.getTipoConstruccion() + " en esta ubicacion")))
+                .switchIfEmpty(solicitudRepository.createSolicitud(solicitud)).cast(Solicitud.class);
     }
 }
