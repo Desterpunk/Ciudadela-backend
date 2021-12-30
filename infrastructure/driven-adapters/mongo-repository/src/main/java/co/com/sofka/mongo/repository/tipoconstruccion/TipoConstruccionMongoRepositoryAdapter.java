@@ -33,4 +33,9 @@ public class TipoConstruccionMongoRepositoryAdapter extends AdapterOperations<Ti
                 .build();
         return repository.save(tipoConstruccionData).map(this::toEntity);
     }
+
+    @Override
+    public Mono<TipoConstruccion> findByNombreTipoConstruccion(String nombreTipoConstruccion) {
+        return repository.findByNombreTipoConstruccion(nombreTipoConstruccion);
+    }
 }

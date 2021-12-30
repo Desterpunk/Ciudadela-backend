@@ -12,6 +12,7 @@ import co.com.sofka.usecase.material.UpdateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
 import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
+import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -43,5 +44,8 @@ public class UseCasesConfig {
         }
         public UpdateMaterialUseCase updateMaterialUseCase(MaterialRepository materialRepository) {
                 return new UpdateMaterialUseCase(materialRepository);
+        }
+        public FindByNombreTipoConstruccionUseCase findByNombreTipoConstruccionUseCase(TipoConstruccionRepository tipoConstruccionRepository){
+                return new FindByNombreTipoConstruccionUseCase(tipoConstruccionRepository);
         }
 }

@@ -5,4 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface TipoConstruccionRepository {
     Mono<TipoConstruccion> createTipoConstruccion(TipoConstruccion tipoConstruccion);
+    Mono<TipoConstruccion> findByNombreTipoConstruccion(String nombreTipoConstruccion);
 }

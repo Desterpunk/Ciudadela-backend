@@ -102,4 +102,12 @@ public class Router {
                         .body(handler.findByNombreMaterial(request.pathVariable("name")), Material.class));
 
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> findbynombretipoconstruccion(Handler handler) {
+        return route(GET("/tipoconstruccion/{tipo}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.findByNombreTipoConstruccion(request.pathVariable("tipo")), Material.class));
+
+    }
 }
