@@ -12,6 +12,7 @@ import co.com.sofka.usecase.material.FindAllMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
 import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
+import co.com.sofka.usecase.solicitud.FindAllSolicitudUseCase;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -142,6 +143,14 @@ public class Router {
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))
                         )
+        );
+    }
+    @Bean
+    public RouterFunction<ServerResponse> getAllSolicitud(FindAllSolicitudUseCase findAllSolicitudUseCase){
+        return route(GET("/solicitud").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(findAllSolicitudUseCase.findAllSolicitud(), Solicitud.class))
         );
     }
 }

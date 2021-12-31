@@ -6,6 +6,7 @@ import co.com.sofka.mongo.entities.SolicitudData;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -36,5 +37,10 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     @Override
     public Mono<Solicitud> findByXAndY(Double x, Double y) {
         return repository.findByXAndY(x,y);
+    }
+
+    @Override
+    public Flux<Solicitud> findAllSolicitud() {
+        return repository.findAll().map(this::toEntity);
     }
 }
