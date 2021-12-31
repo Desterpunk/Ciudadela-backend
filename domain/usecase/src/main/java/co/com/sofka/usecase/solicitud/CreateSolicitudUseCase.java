@@ -20,14 +20,18 @@ public class CreateSolicitudUseCase {
     private final ReducirMaterialSegunTipoUseCase reducirMaterialSegunTipoUseCase;
 
     public Mono<Solicitud> createSolicitud(Solicitud solicitud){
-        OrdenConstruccion ordenConstruccion = new OrdenConstruccion();
-        ordenConstruccion.setIdSolicitud(solicitud.getId());
-
-
-        return tipoConstruccionRepository.findByNombreTipoConstruccion(solicitud.getTipoConstruccion())
+        return solicitudRepository.findByXAndY(solicitud.getX(),solicitud.getY())
+                .flatMap(solicitudByXandX -> Mono.error(new RuntimeException("Ya existe un/a " + solicitud.getTipoConstruccion() + " en esta ubicacion")).cast(Solicitud.class))
+                .defaultIfEmpty(solicitud)
+                .flatMap(currentSolicitud -> tipoConstruccionRepository.findByNombreTipoConstruccion(currentSolicitud.getTipoConstruccion()))
                 .flatMap(reducirMaterialSegunTipoUseCase::reducirMaterialSegunTipo)
-                .flatMap(construccion -> solicitudRepository.findByXAndY(solicitud.getX(),solicitud.getY()))
-                .flatMap(resource -> Mono.error(new RuntimeException("Ya existe un/a " + resource.getTipoConstruccion() + " en esta ubicacion")))
-                .switchIfEmpty(solicitudRepository.createSolicitud(solicitud)).cast(Solicitud.class);
+                .flatMap(currentSolicitud -> solicitudRepository.createSolicitud(solicitud))
+                .flatMap(currentSolicitud -> {
+                    solicitud.setId(currentSolicitud.getId());
+                    OrdenConstruccion ordenConstruccion = new OrdenConstruccion();
+                    ordenConstruccion.setIdSolicitud(currentSolicitud.getId());
+                    ordenConstruccion.setEstadoOrdenConstruccion("Pendiente");
+                    return ordenConstruccionRepository.createOrdenConstruccion(ordenConstruccion);
+                }).flatMap(request -> Mono.just(solicitud));
     }
 }
