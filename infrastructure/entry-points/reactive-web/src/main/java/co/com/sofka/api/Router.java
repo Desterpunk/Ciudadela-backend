@@ -197,4 +197,12 @@ public class Router {
                         .body(handler.findFechaEntregaSolicitudById(request.pathVariable("id")), Material.class));
 
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> createFileSolicitudEstado(Handler handler) {
+        return route(GET("/createfilesolicitud/{estado}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.createFileSolicitudByEstado(request.pathVariable("estado")), Material.class));
+
+    }
 }

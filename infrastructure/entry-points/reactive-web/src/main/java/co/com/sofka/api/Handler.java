@@ -6,10 +6,7 @@ import co.com.sofka.model.solicitud.Solicitud;
 import co.com.sofka.model.tipoconstruccion.TipoConstruccion;
 import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.FindAllOrdenByEstadoUseCase;
-import co.com.sofka.usecase.solicitud.FindAllSolicitudByEstadoUseCase;
-import co.com.sofka.usecase.solicitud.FindByXAndYUseCase;
-import co.com.sofka.usecase.solicitud.FindFechaEntregaSolicitudUseCase;
-import co.com.sofka.usecase.solicitud.FindSolicitudByIdUseCase;
+import co.com.sofka.usecase.solicitud.*;
 import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,6 +26,7 @@ public class Handler {
     private final FindSolicitudByIdUseCase findSolicitudByIdUseCase;
     private final FindAllSolicitudByEstadoUseCase findAllSolicitudByEstadoUseCase;
     private final FindFechaEntregaSolicitudUseCase findFechaEntregaSolicitudUseCase;
+    private final CreateFileSolicitudByEstadoUseCase createFileSolicitudByEstadoUseCase;
 
     public Mono<Material> findByNombreMaterial(String nombreMaterial) {
         Mono<Material> materialMono = findByNombreMaterialUseCase.findByNombreMaterial(nombreMaterial);
@@ -64,5 +62,10 @@ public class Handler {
     public Mono<LocalDateTime> findFechaEntregaSolicitudById(String id) {
         Mono<LocalDateTime> localDateTimeMono = findFechaEntregaSolicitudUseCase.findSFechaEntregaSolicitud(id);
         return localDateTimeMono;
+    }
+
+    public Mono<String> createFileSolicitudByEstado(String estado) {
+        Mono<String> stringMono = createFileSolicitudByEstadoUseCase.createFileSolicitudByEstado(estado);
+        return stringMono;
     }
 }

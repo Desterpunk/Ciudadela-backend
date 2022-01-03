@@ -1,0 +1,2 @@
+Solicitudes con estado pendiente: 
+[Solicitud(id=61d2feba304c7c10863c699f, tipoConstruccion=casa, x=1.0, y=1.0, fechaInicio=2022-01-04T08:00:00.922, fechaEntrega=2022-01-07T17:00:00.922), Solicitud(id=61d2fec0304c7c10863c69a1, tipoConstruccion=casa, x=2.0, y=1.0, fechaInicio=2022-01-08T08:00:00.922, fechaEntrega=2022-01-11T17:00:00.922)]
