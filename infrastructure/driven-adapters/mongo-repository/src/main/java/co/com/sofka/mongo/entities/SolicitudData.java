@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Document("solicitud")
 @Data
@@ -16,6 +16,6 @@ public class SolicitudData {
     private String tipoConstruccion;
     private Double x;
     private Double y;
-    private Date fechaInicio;
-    private Date fechaEntrega;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaEntrega;
 }

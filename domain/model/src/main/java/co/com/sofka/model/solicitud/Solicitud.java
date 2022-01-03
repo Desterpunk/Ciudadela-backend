@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Builder(toBuilder = true)
@@ -15,6 +15,6 @@ public class Solicitud {
     private String tipoConstruccion;
     private Double x;
     private Double y;
-    private Date fechaInicio;
-    private Date fechaEntrega;
+    private LocalDateTime fechaInicio;
+    private LocalDateTime fechaEntrega;
 }

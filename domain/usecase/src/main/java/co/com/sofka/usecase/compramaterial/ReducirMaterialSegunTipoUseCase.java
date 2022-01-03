@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public class ReducirMaterialSegunTipoUseCase {
     private final MaterialRepository materialRepository;
 
-    public Mono<String> reducirMaterialSegunTipo(TipoConstruccion tipoConstruccion){
+    public Mono<TipoConstruccion> reducirMaterialSegunTipo(TipoConstruccion tipoConstruccion){
         return materialRepository.findAllMaterial().flatMap(material -> {
             switch (material.getNombreMaterial()) {
                 case "cemento":
@@ -47,7 +47,7 @@ public class ReducirMaterialSegunTipoUseCase {
             }
 
         }).collectList().map(resource -> {
-            return "Enviado";
+            return tipoConstruccion;
         });
     }
 }

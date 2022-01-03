@@ -6,6 +6,7 @@ import reactor.core.publisher.Mono;
 
 public interface SolicitudRepository {
     Mono<Solicitud> createSolicitud(Solicitud solicitud);
+    Mono<Solicitud> updateSolicitud(Solicitud solicitud);
     Mono<Solicitud> findByXAndY(Double x, Double y);
     Flux<Solicitud> findAllSolicitud();
 }

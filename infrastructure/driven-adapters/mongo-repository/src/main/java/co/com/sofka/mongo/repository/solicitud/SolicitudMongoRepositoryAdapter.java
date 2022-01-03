@@ -35,6 +35,19 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     }
 
     @Override
+    public Mono<Solicitud> updateSolicitud(Solicitud solicitud) {
+        SolicitudData solicitudData = SolicitudData.builder().id(solicitud.getId())
+                .tipoConstruccion(solicitud.getTipoConstruccion())
+                .x(solicitud.getX())
+                .y(solicitud.getY())
+                .fechaInicio(solicitud.getFechaInicio())
+                .fechaEntrega(solicitud.getFechaEntrega())
+                .build();
+        System.out.println(solicitudData);
+        return repository.save(solicitudData).map(this::toEntity);
+    }
+
+    @Override
     public Mono<Solicitud> findByXAndY(Double x, Double y) {
         return repository.findByXAndY(x,y);
     }
