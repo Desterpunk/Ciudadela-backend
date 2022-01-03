@@ -60,7 +60,7 @@ public class CreateSolicitudUseCase {
                 .flatMap(currentSolicitud -> {
                     OrdenConstruccion ordenConstruccion = new OrdenConstruccion();
                     ordenConstruccion.setIdSolicitud(currentSolicitud.getId());
-                    ordenConstruccion.setEstadoOrdenConstruccion("Pendiente");
+                    ordenConstruccion.setEstadoOrdenConstruccion("pendiente");
                     return ordenConstruccionRepository.createOrdenConstruccion(ordenConstruccion);
                 }).flatMap(request -> Mono.just(solicitud));
     }

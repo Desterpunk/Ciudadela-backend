@@ -6,6 +6,7 @@ import co.com.sofka.mongo.entities.OrdenConstruccionData;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -27,6 +28,11 @@ public class OrdenConstruccionMongoRepositoryAdapter extends AdapterOperations<O
                 .estadoOrdenConstruccion(ordenConstruccion.getEstadoOrdenConstruccion())
                 .build();
         return repository.save(ordenConstruccionData).map(this::toEntity);
+    }
+
+    @Override
+    public Flux<OrdenConstruccion> findAllByEstadoOrdenConstruccion(String estadoOrdenConstruccion) {
+        return repository.findAllByEstadoOrdenConstruccion(estadoOrdenConstruccion);
     }
 }
 

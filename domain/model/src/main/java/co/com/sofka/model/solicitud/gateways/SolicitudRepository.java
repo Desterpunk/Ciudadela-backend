@@ -9,4 +9,5 @@ public interface SolicitudRepository {
     Mono<Solicitud> updateSolicitud(Solicitud solicitud);
     Mono<Solicitud> findByXAndY(Double x, Double y);
     Flux<Solicitud> findAllSolicitud();
+    Mono<Solicitud> findById(String id);
 }

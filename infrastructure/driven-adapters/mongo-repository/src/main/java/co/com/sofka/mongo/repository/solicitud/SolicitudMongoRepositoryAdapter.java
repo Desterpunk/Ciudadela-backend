@@ -56,4 +56,9 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     public Flux<Solicitud> findAllSolicitud() {
         return repository.findAll().map(this::toEntity);
     }
+
+    @Override
+    public Mono<Solicitud> findById (String id){
+        return repository.findById(id).map(this::toEntity);
+    }
 }

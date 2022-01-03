@@ -165,4 +165,20 @@ public class Router {
                         .body(BodyInserters.fromPublisher(findAllSolicitudUseCase.findAllSolicitud(), Solicitud.class))
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> findOrdenByEstado(Handler handler) {
+        return route(GET("/orden/{estado}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.findOrdenByEstado(request.pathVariable("estado")), Material.class));
+
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> findSolicitudById(Handler handler) {
+        return route(GET("/solicitud/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.findSolicitudById(request.pathVariable("id")), Material.class));
+
+    }
 }
