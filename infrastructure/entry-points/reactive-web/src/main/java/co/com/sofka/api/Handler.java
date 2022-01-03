@@ -8,12 +8,15 @@ import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.ordenConstruccion.FindAllOrdenByEstadoUseCase;
 import co.com.sofka.usecase.solicitud.FindAllSolicitudByEstadoUseCase;
 import co.com.sofka.usecase.solicitud.FindByXAndYUseCase;
+import co.com.sofka.usecase.solicitud.FindFechaEntregaSolicitudUseCase;
 import co.com.sofka.usecase.solicitud.FindSolicitudByIdUseCase;
 import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -25,6 +28,7 @@ public class Handler {
     private final FindAllOrdenByEstadoUseCase findAllOrdenByEstadoUseCase;
     private final FindSolicitudByIdUseCase findSolicitudByIdUseCase;
     private final FindAllSolicitudByEstadoUseCase findAllSolicitudByEstadoUseCase;
+    private final FindFechaEntregaSolicitudUseCase findFechaEntregaSolicitudUseCase;
 
     public Mono<Material> findByNombreMaterial(String nombreMaterial) {
         Mono<Material> materialMono = findByNombreMaterialUseCase.findByNombreMaterial(nombreMaterial);
@@ -55,5 +59,10 @@ public class Handler {
         System.out.println(estado);
         Flux<Solicitud> solicitudFlux = findAllSolicitudByEstadoUseCase.findAllSolicitudByEstado(estado);
         return solicitudFlux;
+    }
+
+    public Mono<LocalDateTime> findFechaEntregaSolicitudById(String id) {
+        Mono<LocalDateTime> localDateTimeMono = findFechaEntregaSolicitudUseCase.findSFechaEntregaSolicitud(id);
+        return localDateTimeMono;
     }
 }

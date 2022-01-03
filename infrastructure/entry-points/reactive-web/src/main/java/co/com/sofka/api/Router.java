@@ -189,4 +189,12 @@ public class Router {
                         .body(handler.findSolicitudByEstado(request.pathVariable("estado")), Material.class));
 
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> findFechaEntregaSolicitud(Handler handler) {
+        return route(GET("/fechaentregasolicitud/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(handler.findFechaEntregaSolicitudById(request.pathVariable("id")), Material.class));
+
+    }
 }
