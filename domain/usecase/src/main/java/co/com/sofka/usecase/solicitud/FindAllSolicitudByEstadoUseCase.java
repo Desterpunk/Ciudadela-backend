@@ -12,11 +12,8 @@ public class FindAllSolicitudByEstadoUseCase {
     private final FindAllOrdenByEstadoUseCase findAllOrdenByEstadoUseCase;
 
     public Flux<Solicitud> findAllSolicitudByEstado(String estado){
-        System.out.println(estado);
-//        findAllOrdenByEstadoUseCase.findAllOrdenByProgress(estado.toLowerCase()).flatMap(ordenConstruccion -> {
-//            System.out.println(ordenConstruccion.getIdSolicitud());
-//            return solicitudRepository.findById(ordenConstruccion.getIdSolicitud());
-//        }).subscribe();
-        return solicitudRepository.findAllSolicitud();
+        return findAllOrdenByEstadoUseCase.findAllOrdenByProgress(estado.toLowerCase()).flatMap(ordenConstruccion -> {
+            return solicitudRepository.findById(ordenConstruccion.getIdSolicitud());
+        });
     }
 }

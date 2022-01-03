@@ -50,4 +50,10 @@ public class Handler {
         Mono<Solicitud> solicitudMono = findSolicitudByIdUseCase.findSolicitudById(id);
         return solicitudMono;
     }
+
+    public Flux<Solicitud> findSolicitudByEstado(String estado) {
+        System.out.println(estado);
+        Flux<Solicitud> solicitudFlux = findAllSolicitudByEstadoUseCase.findAllSolicitudByEstado(estado);
+        return solicitudFlux;
+    }
 }
