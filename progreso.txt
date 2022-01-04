@@ -1,1 +1,2 @@
-Solicitudes con estado progreso[Solicitud(id=61d31a6be950a85289707944, tipoConstruccion=casa, x=3.0, y=1.0, fechaInicio=2022-01-12T08:00:00.922, fechaEntrega=2022-01-15T17:00:00.922)]
+Solicitudes con estado progreso: 
+[]

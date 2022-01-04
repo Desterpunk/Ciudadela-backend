@@ -1,0 +1,97 @@
+POST http://localhost:8080/material/create
+{
+    "nombreMaterial": "cemento",
+    "cantidadDisponibleMaterial": "500"
+}
+{
+    "nombreMaterial": "grava",
+    "cantidadDisponibleMaterial": "500"
+}
+{
+    "nombreMaterial": "arena",
+    "cantidadDisponibleMaterial": "500"
+}
+{
+    "nombreMaterial": "madera",
+    "cantidadDisponibleMaterial": "500"
+}
+{
+    "nombreMaterial": "adobe",
+    "cantidadDisponibleMaterial": "500"
+}
+
+POST http://localhost:8080/tipoconstruccion/create
+{
+    "nombreTipoConstruccion": "casa",
+    "cemento": "100",
+    "grava": "50",
+    "arena": "90",
+    "madera": "20",
+    "adobe": "100",
+    "dias": "3"
+}
+{
+    "nombreTipoConstruccion": "lago",
+    "cemento": "50",
+    "grava": "60",
+    "arena": "80",
+    "madera": "10",
+    "adobe": "20",
+    "dias": "2"
+}
+{
+    "nombreTipoConstruccion": "cancha",
+    "cemento": "20",
+    "grava": "20",
+    "arena": "20",
+    "madera": "20",
+    "adobe": "20",
+    "dias": "1"
+}
+{
+    "nombreTipoConstruccion": "edificio",
+    "cemento": "200",
+    "grava": "100",
+    "arena": "180",
+    "madera": "40",
+    "adobe": "200",
+    "dias": "6"
+}
+{
+    "nombreTipoConstruccion": "gimnasio",
+    "cemento": "50",
+    "grava": "25",
+    "arena": "45",
+    "madera": "10",
+    "adobe": "50",
+    "dias": "2"
+}
+
+//=====================================================================================================
+Los requisitos eran los anteriores ahora para crear la solicitud es:
+
+POST http://localhost:8080/solicitud/create
+{
+    "tipoConstruccion": "casa",
+    "x": "4",
+    "y": "1"
+}
+
+En caso de que se acabe algun material:
+
+POST http://localhost:8080/compramaterial/create
+
+{
+    "material": "madera",
+    "cantidadIngresada": "5000"
+}
+
+Para obtener la fecha en la que termina un proyecto
+
+GET http://localhost:8080/fechaentregasolicitud/idSolicitud
+
+Para crear informe, este me crea un txt en la carpeta raiz
+
+GET http://localhost:8080/createfilesolicitud/pendiente
+http://localhost:8080/createfilesolicitud/progreso
+http://localhost:8080/createfilesolicitud/finalizado
