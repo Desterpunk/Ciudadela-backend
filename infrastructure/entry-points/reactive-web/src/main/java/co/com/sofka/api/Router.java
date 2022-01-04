@@ -2,6 +2,7 @@ package co.com.sofka.api;
 
 import co.com.sofka.model.compramaterial.CompraMaterial;
 import co.com.sofka.model.material.Material;
+import co.com.sofka.model.notificacion.Notificacion;
 import co.com.sofka.model.ordenconstruccion.OrdenConstruccion;
 import co.com.sofka.model.solicitud.Solicitud;
 import co.com.sofka.model.tipoconstruccion.TipoConstruccion;
@@ -11,6 +12,7 @@ import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.material.FindAllMaterialUseCase;
 import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
+import co.com.sofka.usecase.notificacion.NotificacionUseCase;
 import co.com.sofka.usecase.ordenConstruccion.*;
 import co.com.sofka.usecase.solicitud.*;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
@@ -232,6 +234,18 @@ public class Router {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(updateOrdenStatusUseCase.updateOrdenStatus(), String.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> sendNotification(NotificacionUseCase notificacionUseCase) {
+        return route(POST("/sendNotification").and(accept(MediaType.APPLICATION_JSON)),
+                request -> request.bodyToMono(Notificacion.class)
+                        .flatMap(resourceDTO -> notificacionUseCase.sendNotificacion(resourceDTO)
+                                .flatMap(result -> ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result))
+                        )
         );
     }
 }
