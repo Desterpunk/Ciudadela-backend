@@ -1,6 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+    implementation project( ':scheduler')
 	implementation project( ':reactive-web')
     compile 'org.reactivecommons.utils:object-mapper:0.1.0'
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'

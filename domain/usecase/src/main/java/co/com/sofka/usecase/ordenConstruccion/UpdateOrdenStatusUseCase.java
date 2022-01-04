@@ -27,15 +27,16 @@ public class UpdateOrdenStatusUseCase {
                     ordenConstruccionRepository.updateOrdenCOnstruccion(ordenConstruccion).subscribe();
                     ordenConstruccion.setEstadoOrdenConstruccion("progreso");
                     updateOrdenUseCase.updateOrden(ordenConstruccion).subscribe();
+                    System.out.println("Estado con la orden " + ordenConstruccion.getId() + " actualizado (progreso)");
                     return Mono.just("Estado con la orden " + ordenConstruccion.getId() + " actualizado (progreso)");
                 }
 
                 if (horaActual>17 && solicitud.getFechaEntrega().format(formato).equals(fechaActual.format(formato))
                         && ordenConstruccion.getEstadoOrdenConstruccion().equals("progreso")){
-                    System.out.println(ordenConstruccion);
                     ordenConstruccion.setId(ordenConstruccion.getId());
                     ordenConstruccion.setEstadoOrdenConstruccion("finalizado");
                     updateOrdenUseCase.updateOrden(ordenConstruccion).subscribe();
+                    System.out.println("Estado con la orden " + ordenConstruccion.getId() + " actualizado (finalizado)");
                     return Mono.just("Estado con la orden " + ordenConstruccion.getId() + " actualizado (finalizado)");
                 }
                 return Mono.just("Estado con la orden " + ordenConstruccion.getId() + " No a cambiado");
