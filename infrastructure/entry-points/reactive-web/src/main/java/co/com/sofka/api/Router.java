@@ -9,12 +9,12 @@ import co.com.sofka.usecase.compramaterial.CreateCompraMaterialUseCase;
 import co.com.sofka.usecase.compramaterial.ReducirMaterialSegunTipoUseCase;
 import co.com.sofka.usecase.material.CreateMaterialUseCase;
 import co.com.sofka.usecase.material.FindAllMaterialUseCase;
+import co.com.sofka.usecase.material.FindByNombreMaterialUseCase;
 import co.com.sofka.usecase.material.UpdateMaterialUseCase;
-import co.com.sofka.usecase.ordenConstruccion.CreateOrdenConstruccionUseCase;
-import co.com.sofka.usecase.solicitud.CreateSolicitudUseCase;
-import co.com.sofka.usecase.solicitud.FindAllSolicitudUseCase;
-import co.com.sofka.usecase.solicitud.UpdateSolicitudUseCase;
+import co.com.sofka.usecase.ordenConstruccion.*;
+import co.com.sofka.usecase.solicitud.*;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
+import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -115,18 +115,18 @@ public class Router {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> routerFunction(Handler handler) {
+    public RouterFunction<ServerResponse> routerFunction(FindByNombreMaterialUseCase findByNombreMaterialUseCase) {
         return route(GET("/material/{name}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findByNombreMaterial(request.pathVariable("name")), Material.class));
+                        .body(findByNombreMaterialUseCase.findByNombreMaterial(request.pathVariable("name")), Material.class));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findbynombretipoconstruccion(Handler handler) {
+    public RouterFunction<ServerResponse> findbynombretipoconstruccion(FindByNombreTipoConstruccionUseCase findByNombreTipoConstruccionUseCase) {
         return route(GET("/tipoconstruccion/{tipo}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findByNombreTipoConstruccion(request.pathVariable("tipo")), Material.class));
+                        .body(findByNombreTipoConstruccionUseCase.findByNombreTipoConstruccion(request.pathVariable("tipo")), Material.class));
 
     }
     @Bean
@@ -139,10 +139,10 @@ public class Router {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findByXandY(Handler handler) {
+    public RouterFunction<ServerResponse> findByXandY(FindByXAndYUseCase findByXAndYUseCase) {
         return route(GET("/solicitud/{x}/{y}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findByXandY(request.pathVariable("x"),request.pathVariable("y")), Boolean.class));
+                        .body(findByXAndYUseCase.findByXAndY(Double.parseDouble(request.pathVariable("x")),Double.parseDouble(request.pathVariable("y"))), Boolean.class));
 
     }
 
@@ -167,42 +167,71 @@ public class Router {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findOrdenByEstado(Handler handler) {
+    public RouterFunction<ServerResponse> findOrdenByEstado(FindAllOrdenByEstadoUseCase findAllOrdenByEstadoUseCase) {
         return route(GET("/orden/{estado}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findOrdenByEstado(request.pathVariable("estado")), Material.class));
+                        .body(findAllOrdenByEstadoUseCase.findAllOrdenByProgress(request.pathVariable("estado")), Material.class));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findSolicitudById(Handler handler) {
+    public RouterFunction<ServerResponse> findSolicitudById(FindSolicitudByIdUseCase findSolicitudByIdUseCase) {
         return route(GET("/solicitud/{id}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findSolicitudById(request.pathVariable("id")), Material.class));
+                        .body(findSolicitudByIdUseCase.findSolicitudById(request.pathVariable("id")), Material.class));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findSolicitudByEstado(Handler handler) {
+    public RouterFunction<ServerResponse> findSolicitudByEstado(FindAllSolicitudByEstadoUseCase findAllSolicitudByEstadoUseCase) {
         return route(GET("/solicitudestado/{estado}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findSolicitudByEstado(request.pathVariable("estado")), Material.class));
+                        .body(findAllSolicitudByEstadoUseCase.findAllSolicitudByEstado(request.pathVariable("estado")), Material.class));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findFechaEntregaSolicitud(Handler handler) {
+    public RouterFunction<ServerResponse> findFechaEntregaSolicitud(FindFechaEntregaSolicitudUseCase findFechaEntregaSolicitudUseCase) {
         return route(GET("/fechaentregasolicitud/{id}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.findFechaEntregaSolicitudById(request.pathVariable("id")), Material.class));
+                        .body(findFechaEntregaSolicitudUseCase.findSFechaEntregaSolicitud(request.pathVariable("id")), Material.class));
 
     }
 
     @Bean
-    public RouterFunction<ServerResponse> createFileSolicitudEstado(Handler handler) {
+    public RouterFunction<ServerResponse> createFileSolicitudEstado(CreateFileSolicitudByEstadoUseCase createFileSolicitudByEstadoUseCase) {
         return route(GET("/createfilesolicitud/{estado}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                        .body(handler.createFileSolicitudByEstado(request.pathVariable("estado")), Material.class));
+                        .body(createFileSolicitudByEstadoUseCase.createFileSolicitudByEstado(request.pathVariable("estado")), Material.class));
 
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> getAllOrdenConstruccion(FindAllOrdenUseCase findAllOrdenUseCase){
+        return route(GET("/getallorden").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(findAllOrdenUseCase.findAllOrden(), OrdenConstruccion.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> updateOrden(UpdateOrdenUseCase updateOrdenUseCase){
+        return route(PUT("/updateOrden").and(accept(MediaType.APPLICATION_JSON)),
+                request ->request.bodyToMono(OrdenConstruccion.class)
+                        .flatMap(recursoDTO -> updateOrdenUseCase.updateOrden(recursoDTO)
+                                .flatMap(result->ServerResponse.ok()
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .bodyValue(result)))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> updateOrdenStatus(UpdateOrdenStatusUseCase updateOrdenStatusUseCase){
+        return route(GET("/updateOrdenStatus").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(updateOrdenStatusUseCase.updateOrdenStatus(), String.class))
+        );
     }
 }

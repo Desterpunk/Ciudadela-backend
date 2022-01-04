@@ -7,4 +7,6 @@ import reactor.core.publisher.Mono;
 public interface OrdenConstruccionRepository {
     Mono<OrdenConstruccion> createOrdenConstruccion(OrdenConstruccion ordenConstruccion);
     Flux<OrdenConstruccion> findAllByEstadoOrdenConstruccion(String estadoOrdenConstruccion);
+    Flux<OrdenConstruccion> findAllOrdenConstruccion();
+    Mono<OrdenConstruccion> updateOrdenCOnstruccion(OrdenConstruccion ordenConstruccion);
 }

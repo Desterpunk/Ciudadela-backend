@@ -34,5 +34,19 @@ public class OrdenConstruccionMongoRepositoryAdapter extends AdapterOperations<O
     public Flux<OrdenConstruccion> findAllByEstadoOrdenConstruccion(String estadoOrdenConstruccion) {
         return repository.findAllByEstadoOrdenConstruccion(estadoOrdenConstruccion);
     }
+
+    @Override
+    public Flux<OrdenConstruccion> findAllOrdenConstruccion(){
+        return repository.findAll().map(this::toEntity);
+    }
+
+    @Override
+    public Mono<OrdenConstruccion> updateOrdenCOnstruccion(OrdenConstruccion ordenConstruccion) {
+        OrdenConstruccionData ordenConstruccionData = OrdenConstruccionData.builder().id(ordenConstruccion.getId())
+                .idSolicitud(ordenConstruccion.getIdSolicitud())
+                .estadoOrdenConstruccion(ordenConstruccion.getEstadoOrdenConstruccion())
+                .build();
+        return repository.save(ordenConstruccionData).map(this::toEntity);
+    }
 }
 

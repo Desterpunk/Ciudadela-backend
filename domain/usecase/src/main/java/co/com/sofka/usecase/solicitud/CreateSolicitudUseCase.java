@@ -22,7 +22,7 @@ public class CreateSolicitudUseCase {
     private final ReducirMaterialSegunTipoUseCase reducirMaterialSegunTipoUseCase;
 
     public Mono<Solicitud> createSolicitud(Solicitud solicitud){
-        final LocalDateTime[] dateTime = {LocalDateTime.now().plusDays(1).withHour(8).withMinute(00).withSecond(00)};
+        final LocalDateTime[] dateTime = {LocalDateTime.now().plusDays(1).withHour(8).withMinute(00).withSecond(00).withNano(00)};
         return solicitudRepository.findByXAndY(solicitud.getX(),solicitud.getY())
                 .flatMap(solicitudByXandX -> Mono.error(new RuntimeException("Ya existe un/a " + solicitud.getTipoConstruccion() + " en esta ubicacion")).cast(Solicitud.class))
                 .defaultIfEmpty(solicitud)
@@ -44,8 +44,8 @@ public class CreateSolicitudUseCase {
 
                         if (solicitudes.getFechaEntrega() == null){
                             return tipoConstruccionRepository.findByNombreTipoConstruccion(currentSolicitud.getTipoConstruccion()).map(tipoConstruccion -> {
-                                solicitudes.setFechaEntrega(dateTime[0].plusDays(tipoConstruccion.getDias()).withHour(17));
-                                solicitud.setFechaEntrega(dateTime[0].plusDays(tipoConstruccion.getDias()).withHour(17));
+                                solicitudes.setFechaEntrega(dateTime[0].plusDays(tipoConstruccion.getDias()).withHour(17).withNano(00));
+                                solicitud.setFechaEntrega(dateTime[0].plusDays(tipoConstruccion.getDias()).withHour(17).withNano(00));
                                 return tipoConstruccion;
                             }).flatMap(resurce -> {return solicitudRepository.updateSolicitud(solicitudes);}).map(resource -> {
                                 return Mono.just(solicitudes);
