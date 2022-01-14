@@ -16,6 +16,7 @@ import co.com.sofka.usecase.notificacion.NotificacionUseCase;
 import co.com.sofka.usecase.ordenConstruccion.*;
 import co.com.sofka.usecase.solicitud.*;
 import co.com.sofka.usecase.tipoconstruccion.CreateTipoConstruccionUseCase;
+import co.com.sofka.usecase.tipoconstruccion.FindAllTipoConstruccionUseCase;
 import co.com.sofka.usecase.tipoconstruccion.FindByNombreTipoConstruccionUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -214,6 +215,15 @@ public class Router {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(findAllOrdenUseCase.findAllOrden(), OrdenConstruccion.class))
+        );
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> getAllTipoConstruccion(FindAllTipoConstruccionUseCase findAllTipoConstruccionUseCase){
+        return route(GET("/getalltipo").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(findAllTipoConstruccionUseCase.findAllTipoConstruccion(), TipoConstruccion.class))
         );
     }
 

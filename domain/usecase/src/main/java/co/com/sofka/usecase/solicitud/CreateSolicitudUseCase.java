@@ -33,7 +33,6 @@ public class CreateSolicitudUseCase {
                 })
                 .flatMap(currentSolicitud -> {
                     return solicitudRepository.findAllSolicitud().flatMap(solicitudes -> {
-                        System.out.println(solicitudes);
                         solicitud.setId(solicitudes.getId());
                         if (solicitudes.getFechaInicio() == null){
 

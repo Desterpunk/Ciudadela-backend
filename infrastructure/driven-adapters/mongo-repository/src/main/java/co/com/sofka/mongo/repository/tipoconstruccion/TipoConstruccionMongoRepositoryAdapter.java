@@ -6,6 +6,7 @@ import co.com.sofka.mongo.entities.TipoConstruccionData;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
@@ -37,5 +38,10 @@ public class TipoConstruccionMongoRepositoryAdapter extends AdapterOperations<Ti
     @Override
     public Mono<TipoConstruccion> findByNombreTipoConstruccion(String nombreTipoConstruccion) {
         return repository.findByNombreTipoConstruccion(nombreTipoConstruccion);
+    }
+
+    @Override
+    public Flux<TipoConstruccion> findAllTipoConstruccion() {
+        return repository.findAll().map(this::toEntity);
     }
 }
