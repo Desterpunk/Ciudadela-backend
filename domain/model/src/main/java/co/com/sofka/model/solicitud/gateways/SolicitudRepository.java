@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 public interface SolicitudRepository {
     Mono<Solicitud> createSolicitud(Solicitud solicitud);
     Mono<Solicitud> updateSolicitud(Solicitud solicitud);
-    Mono<Solicitud> findByXAndY(Double x, Double y);
+    Mono<Solicitud> findByPosicionCardinalXAndPosicionCardinalY(Double posicionCardinalX, Double posicionCardinalY);
     Flux<Solicitud> findAllSolicitud();
     Mono<Solicitud> findById(String id);
 }

@@ -9,7 +9,7 @@ public class FindByXAndYUseCase {
 
     private final SolicitudRepository solicitudRepository;
 
-    public Mono<Boolean> findByXAndY(Double x, Double y) {
-        return solicitudRepository.findByXAndY(x,y).flatMap(solicitud -> Mono.just(true)).switchIfEmpty(Mono.just(false)).cast(Boolean.class);
+    public Mono<Boolean> findByXAndY(Double posicionCardinalX, Double posicionCardinalY) {
+        return solicitudRepository.findByPosicionCardinalXAndPosicionCardinalY(posicionCardinalX,posicionCardinalY).flatMap(solicitud -> Mono.just(true)).switchIfEmpty(Mono.just(false)).cast(Boolean.class);
     }
 }

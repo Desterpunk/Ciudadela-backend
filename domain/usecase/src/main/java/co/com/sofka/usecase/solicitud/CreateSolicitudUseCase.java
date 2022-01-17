@@ -23,7 +23,7 @@ public class CreateSolicitudUseCase {
 
     public Mono<Solicitud> createSolicitud(Solicitud solicitud){
         final LocalDateTime[] dateTime = {LocalDateTime.now().plusDays(1).withHour(8).withMinute(00).withSecond(00).withNano(00)};
-        return solicitudRepository.findByXAndY(solicitud.getX(),solicitud.getY())
+        return solicitudRepository.findByPosicionCardinalXAndPosicionCardinalY(solicitud.getPosicionCardinalX(),solicitud.getPosicionCardinalY())
                 .flatMap(solicitudByXandX -> Mono.error(new RuntimeException("Ya existe un/a " + solicitud.getTipoConstruccion() + " en esta ubicacion")).cast(Solicitud.class))
                 .defaultIfEmpty(solicitud)
                 .flatMap(currentSolicitud -> tipoConstruccionRepository.findByNombreTipoConstruccion(currentSolicitud.getTipoConstruccion()))

@@ -26,8 +26,8 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     public Mono<Solicitud> createSolicitud(Solicitud solicitud) {
         SolicitudData solicitudData = SolicitudData.builder().id(solicitud.getId())
                 .tipoConstruccion(solicitud.getTipoConstruccion())
-                .x(solicitud.getX())
-                .y(solicitud.getY())
+                .posicionCardinalX(solicitud.getPosicionCardinalX())
+                .posicionCardinalY(solicitud.getPosicionCardinalY())
                 .fechaInicio(solicitud.getFechaInicio())
                 .fechaEntrega(solicitud.getFechaEntrega())
                 .build();
@@ -38,8 +38,8 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     public Mono<Solicitud> updateSolicitud(Solicitud solicitud) {
         SolicitudData solicitudData = SolicitudData.builder().id(solicitud.getId())
                 .tipoConstruccion(solicitud.getTipoConstruccion())
-                .x(solicitud.getX())
-                .y(solicitud.getY())
+                .posicionCardinalX(solicitud.getPosicionCardinalX())
+                .posicionCardinalY(solicitud.getPosicionCardinalY())
                 .fechaInicio(solicitud.getFechaInicio())
                 .fechaEntrega(solicitud.getFechaEntrega())
                 .build();
@@ -48,8 +48,8 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     }
 
     @Override
-    public Mono<Solicitud> findByXAndY(Double x, Double y) {
-        return repository.findByXAndY(x,y);
+    public Mono<Solicitud> findByPosicionCardinalXAndPosicionCardinalY(Double PosicionCardinalX, Double PosicionCardinalY) {
+        return repository.findByPosicionCardinalXAndPosicionCardinalY(PosicionCardinalX,PosicionCardinalY);
     }
 
     @Override

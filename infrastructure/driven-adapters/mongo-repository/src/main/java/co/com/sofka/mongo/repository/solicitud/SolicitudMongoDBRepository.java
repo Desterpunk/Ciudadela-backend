@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
 import reactor.core.publisher.Mono;
 
 public interface SolicitudMongoDBRepository extends ReactiveMongoRepository<SolicitudData, String>, ReactiveQueryByExampleExecutor<SolicitudData> {
-    Mono<Solicitud> findByXAndY(Double x, Double y);
+    Mono<Solicitud> findByPosicionCardinalXAndPosicionCardinalY(Double posicionCardinalX, Double posicionCardinalY);
 }

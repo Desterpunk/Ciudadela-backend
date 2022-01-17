@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class SolicitudData {
     private String id;
     private String tipoConstruccion;
-    private Double x;
-    private Double y;
+    private Double posicionCardinalX;
+    private Double posicionCardinalY;
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaEntrega;
 }
