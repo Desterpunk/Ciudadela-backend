@@ -117,6 +117,15 @@ public class Router {
         );
     }
 
+
+    @Bean
+    public RouterFunction<ServerResponse> deleteSolicitud(DeleteByIdSolicitudUseCase deleteByIdSolicitudUseCase) {
+        return route(DELETE("/solicitud/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                        .body(deleteByIdSolicitudUseCase.deleteSolicitud(request.pathVariable("id")), Material.class));
+
+    }
+
     @Bean
     public RouterFunction<ServerResponse> routerFunction(FindByNombreMaterialUseCase findByNombreMaterialUseCase) {
         return route(GET("/material/{name}").and(accept(MediaType.APPLICATION_JSON)),

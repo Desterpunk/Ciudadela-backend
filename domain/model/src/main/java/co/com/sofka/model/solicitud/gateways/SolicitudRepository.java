@@ -10,4 +10,5 @@ public interface SolicitudRepository {
     Mono<Solicitud> findByPosicionCardinalXAndPosicionCardinalY(Double posicionCardinalX, Double posicionCardinalY);
     Flux<Solicitud> findAllSolicitud();
     Mono<Solicitud> findById(String id);
+    Mono<Void> deleteById(String id);
 }

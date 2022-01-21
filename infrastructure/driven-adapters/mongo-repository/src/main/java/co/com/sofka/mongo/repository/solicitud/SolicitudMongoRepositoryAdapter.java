@@ -61,4 +61,10 @@ public class SolicitudMongoRepositoryAdapter extends AdapterOperations<Solicitud
     public Mono<Solicitud> findById (String id){
         return repository.findById(id).map(this::toEntity);
     }
+
+    @Override
+    public Mono<Void> deleteById(String id) {
+        System.out.println(id);
+        return repository.deleteById(id);
+    }
 }

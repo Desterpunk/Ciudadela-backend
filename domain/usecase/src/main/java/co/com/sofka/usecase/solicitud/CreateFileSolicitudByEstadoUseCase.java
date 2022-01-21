@@ -18,10 +18,10 @@ public class CreateFileSolicitudByEstadoUseCase {
                 myWriter.write("Solicitudes con estado " + estado + ": \n");
                 myWriter.write(resource.toString());
                 myWriter.close();
-                return Mono.just("Successfully wrote to the file.");
+                return Mono.just("Informe realizado de solicitud " + estado);
             } catch (IOException e) {
                 e.printStackTrace();
-                return Mono.just("An error occurred.");
+                return Mono.just("Ha ocurrido un error.");
             }
         });
     }
